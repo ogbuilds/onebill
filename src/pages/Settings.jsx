@@ -584,7 +584,7 @@ function IntegrationsSettings() {
                     </div>
                 </div>
 
-                <div className="checkbox-group" style={{ marginTop: '16px' }}>
+                <div className="checkbox-group" style={{ marginTop: '16px', marginBottom: '16px' }}>
                     <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', cursor: 'pointer' }}>
                         <input
                             type="checkbox"
@@ -594,6 +594,40 @@ function IntegrationsSettings() {
                         Enable Real-time GSTIN Fetching
                     </label>
                 </div>
+
+                {settings.enableRealTimeGst && (
+                    <div className="custom-api-config" style={{
+                        padding: '16px',
+                        backgroundColor: '#f8f9fa',
+                        borderRadius: '8px',
+                        marginTop: '12px'
+                    }}>
+                        <div className="form-group" style={{ marginBottom: '12px' }}>
+                            <label className="form-label" style={{ fontSize: '12px' }}>Custom API Endpoint (Leave blank for Default)</label>
+                            <input
+                                className="form-input"
+                                value={settings.customEndpoint || ''}
+                                onChange={e => setSettings(p => ({ ...p, customEndpoint: e.target.value }))}
+                                placeholder="https://api.example.com/verify"
+                                style={{ backgroundColor: 'white' }}
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label" style={{ fontSize: '12px' }}>Custom API Key / Secret</label>
+                            <input
+                                className="form-input"
+                                type="password"
+                                value={settings.customApiKey || ''}
+                                onChange={e => setSettings(p => ({ ...p, customApiKey: e.target.value }))}
+                                placeholder="Paste your private API key here"
+                                style={{ backgroundColor: 'white' }}
+                            />
+                            <p style={{ fontSize: '11px', color: '#888', marginTop: '4px' }}>
+                                🔒 If you provide a custom key, it will be used instead of the platform-managed key.
+                            </p>
+                        </div>
+                    </div>
+                )}
 
                 <div style={{ marginTop: '20px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
                     <button className="btn btn-secondary" onClick={() => window.open('https://appyflow.in', '_blank')}>

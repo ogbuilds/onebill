@@ -147,9 +147,17 @@ function ClientModal({ businessId, onClose, onDone }) {
             return;
         }
 
+        setFetchingGst(true);
         try {
-            // Fetch details (No API key needed, handled by serverless proxy)
-            const details = await fetchGSTDetails(form.gstin);
+            // Fetch integration settings to check for custom key
+            const settings = await getIntegrationSettings(businessId);
+            const config = {
+                customApiKey: settings?.enableRealTimeGst ? settings.customApiKey : null,
+                customEndpoint: settings?.enableRealTimeGst ? settings.customEndpoint : null
+            };
+
+            // Fetch details (Uses custom key if provided, else platform default)
+            const details = await fetchGSTDetails(form.gstin, config);
 
             if (details) {
                 toast.success('Client details fetched!');

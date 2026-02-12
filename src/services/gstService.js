@@ -10,7 +10,7 @@ const API_BASE_URL = 'https://appyflow.in/api/verifyGST';
  * @param {string} gstin - The GSTIN to verify
  * @returns {Promise<{legalName: string, tradeName: string, address: string, state: string, pincode: string}>}
  */
-export async function fetchGSTDetails(gstin) {
+export async function fetchGSTDetails(gstin, config = {}) {
     if (!gstin) {
         throw new Error('GSTIN is required');
     }
@@ -22,8 +22,14 @@ export async function fetchGSTDetails(gstin) {
     }
 
     try {
+        const { customApiKey, customEndpoint } = config;
+        let url = `/api/verify-gst?gstNo=${gstin}`;
+
+        if (customApiKey) url += `&apiKey=${encodeURIComponent(customApiKey)}`;
+        if (customEndpoint) url += `&customEndpoint=${encodeURIComponent(customEndpoint)}`;
+
         // Points to our Vercel Serverless Function which holds the API Key securely
-        const response = await fetch(`/api/verify-gst?gstNo=${gstin}`);
+        const response = await fetch(url);
 
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
