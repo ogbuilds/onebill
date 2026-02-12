@@ -7,7 +7,7 @@ import { updateBusiness, getBusinessById, grantCAAccess, revokeCAAccess, getCAAc
 import { INDIAN_STATES, validateGSTIN } from '@logic/gstEngine';
 import {
     Building2, Palette, Users, Bell, ChevronRight, Save, Plus, X, Trash2,
-    Upload, CreditCard, Shield, Zap, Globe, Check
+    Upload, CreditCard, Shield, Zap, Globe, Check, ExternalLink
 } from 'lucide-react';
 import './Settings.css';
 
