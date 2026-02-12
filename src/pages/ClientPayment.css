@@ -1,0 +1,249 @@
+.cp-page {
+    min-height: 100vh;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.cp-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: #f0f2f5;
+}
+
+.cp-container {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 24px;
+}
+
+.cp-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.cp-brand h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #1a1d2e;
+}
+
+.cp-brand p {
+    font-size: 13px;
+    color: #666;
+    margin: 4px 0 16px 0;
+}
+
+.cp-amount {
+    background: #f8f9fc;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.cp-amount span {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.cp-amount strong {
+    display: block;
+    font-size: 28px;
+    color: #6c5ce7;
+}
+
+.cp-details {
+    margin-bottom: 24px;
+}
+
+.cp-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cp-row:last-child {
+    border-bottom: none;
+}
+
+.cp-row span {
+    color: #666;
+}
+
+.cp-row strong {
+    color: #1a1d2e;
+}
+
+.cp-payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.cp-method-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 16px;
+    background: #fff;
+}
+
+.cp-method-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1d2e;
+}
+
+.cp-qr-container {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    background: #fff;
+}
+
+.cp-qr {
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
+}
+
+.cp-upi-id {
+    background: #f0f2f5;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cp-upi-id:active {
+    background: #e0e0e0;
+}
+
+.cp-bank-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cp-field {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.cp-field label {
+    color: #666;
+}
+
+.cp-field div {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.cp-upload-section {
+    background: #f8f9fc;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.cp-upload-section h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
+.cp-upload-section p {
+    margin: 0 0 16px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.cp-file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px dashed #6c5ce7;
+    padding: 12px;
+    border-radius: 8px;
+    color: #6c5ce7;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cp-file-upload:hover {
+    background: #eceafc;
+}
+
+.cp-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cp-preview img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.cp-footer {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 11px;
+    color: #aaa;
+}
+
+.cp-success-card {
+    text-align: center;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.cp-success-card h2 {
+    margin: 16px 0 8px 0;
+    color: #2ecc71;
+}
+
+.cp-success-card p {
+    color: #666;
+    line-height: 1.5;
+}

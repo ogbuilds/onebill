@@ -1,0 +1,162 @@
+.salary-slips-page {
+    max-width: 100%;
+}
+
+.salary-slips-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-5);
+}
+
+.salary-slips-page .page-header h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* Form layout */
+.salary-form-layout {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+}
+
+.salary-form-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.salary-preview-container {
+    width: 420px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+}
+
+.salary-preview-scroll {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+
+/* Salary Slip Preview */
+.ss-preview {
+    padding: 28px 24px;
+    font-size: 11px;
+    line-height: 1.5;
+    background: #fff;
+    min-height: 400px;
+}
+
+.ss-header {
+    text-align: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 2.5px solid var(--color-primary, #6C5CE7);
+}
+
+.ss-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.ss-small {
+    font-size: 10px;
+    color: #5F6587;
+}
+
+.ss-title {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--color-primary, #6C5CE7);
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.ss-period {
+    font-size: 11px;
+    color: #5F6587;
+    margin-top: 2px;
+}
+
+.ss-emp-details {
+    background: #F8F9FC;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+}
+
+.ss-emp-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 10px;
+}
+
+.ss-emp-row span {
+    color: #8E93AD;
+}
+
+.ss-breakdown {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.ss-column {
+    flex: 1;
+}
+
+.ss-col-header {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ECEEF5;
+    margin-bottom: 4px;
+}
+
+.ss-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 10px;
+    color: #5F6587;
+}
+
+.ss-line-total {
+    border-top: 1.5px solid #1A1D2E;
+    margin-top: 4px;
+    padding-top: 6px;
+    font-weight: 700;
+    color: #1A1D2E;
+}
+
+.ss-net-pay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.ss-footer {
+    text-align: center;
+    font-size: 9px;
+    color: #8E93AD;
+    padding-top: 10px;
+    border-top: 1px dashed #ECEEF5;
+}

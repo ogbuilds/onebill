@@ -1,0 +1,114 @@
+
+const API_BASE_URL = 'https://appyflow.in/api/verifyGST';
+// Note: This is a placeholder URL structure based on common patterns. 
+// Real integration would need the exact endpoint from Appyflow docs or similar.
+// For now we will implement a robust structure that takes the key and makes the request.
+
+/**
+ * Fetch business details from GSTIN using Appyflow (via serverless proxy)
+ * @param {string} gstin - The GSTIN to verify
+ * @returns {Promise<{legalName: string, tradeName: string, address: string, state: string, pincode: string}>}
+ */
+export async function fetchGSTDetails(gstin) {
+    if (!gstin) {
+        throw new Error('GSTIN is required');
+    }
+
+    // Basic format validation
+    const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    if (!gstRegex.test(gstin)) {
+        throw new Error('Invalid GSTIN format');
+    }
+
+    // MOCK REMOVED: Real-time fetch only.
+
+    try {
+        // Points to our Vercel Serverless Function which holds the API Key securely
+        const response = await fetch(`/api/verify-gst?gstNo=${gstin}`);
+
+        if (!response.ok) {
+            const errData = await response.json().catch(() => ({}));
+            throw new Error(errData.message || `API Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.message || 'Failed to fetch GST details');
+        }
+
+        // Map the response to our internal format
+        // *Adjust mapping based on actual API response structure*
+        // Assuming typical structure: { taxPayer: { legalName, tradeName, addr: { bno, st, loc, ... } } }
+
+        const taxpayer = data.taxpayerInfo || data; // Fallback
+
+        // Helper to construct address
+        const buildAddress = (addrObj) => {
+            if (!addrObj) return '';
+            const parts = [
+                addrObj.bno, addrObj.bnm, // Building no/name
+                addrObj.st, addrObj.loc, // Street, Locality
+                addrObj.city, addrObj.dst, // City, District
+                addrObj.stcd, addrObj.pncd // State Code, Pincode
+            ];
+            return parts.filter(p => p).join(', ');
+        };
+
+        return {
+            legalName: taxpayer.lgnm || taxpayer.tradeName || '',
+            tradeName: taxpayer.tradeNam || '',
+            address: buildAddress(taxpayer.pradr?.addr), // pradr = Principal Address
+            state: taxpayer.pradr?.addr?.stcd || '', // State Name or Code? Need to handle mapping.
+            pincode: taxpayer.pradr?.addr?.pncd || ''
+        };
+
+
+    } catch (error) {
+        console.error('GST Fetch Error:', error);
+        throw error;
+    }
+}
+
+/**
+ * Fetch bank details from IFSC code
+ * Uses Razorpay IFSC API (CORS enabled)
+ */
+export async function fetchBankDetails(ifsc) {
+    if (!ifsc) return null;
+    try {
+        // Call our serverless proxy
+        const response = await fetch(`/api/verify-ifsc?ifsc=${ifsc}`);
+        if (!response.ok) return null;
+        const data = await response.json();
+        return data; // { BANK, BRANCH, CITY, STATE, ... }
+    } catch (error) {
+        console.error('IFSC Fetch Error:', error);
+        return null;
+    }
+}
+
+/**
+ * Fetch city/state from Pincode
+ * Uses public API (postalpincode.in)
+ */
+export async function fetchPincodeDetails(pincode) {
+    if (!pincode || pincode.length < 6) return null;
+    try {
+        const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+        if (!response.ok) return null;
+        const data = await response.json();
+        if (data && data[0] && data[0].Status === 'Success') {
+            const details = data[0].PostOffice[0];
+            return {
+                city: details.District,
+                state: details.State,
+                country: 'India'
+            };
+        }
+        return null;
+    } catch (e) {
+        console.error("Pincode Fetch Error", e);
+        return null;
+    }
+}

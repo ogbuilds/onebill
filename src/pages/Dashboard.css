@@ -1,0 +1,195 @@
+.dashboard {
+    width: 100%;
+}
+
+.dashboard-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.period-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* Performance Banner */
+.performance-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    font-size: var(--font-size-base);
+}
+
+.performance-positive {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    border: 1px solid rgba(0, 184, 148, 0.15);
+}
+
+.performance-negative {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+    border: 1px solid rgba(225, 112, 85, 0.15);
+}
+
+.performance-neutral {
+    background: var(--color-warning-bg);
+    color: #c58a00;
+    border: 1px solid rgba(253, 203, 110, 0.2);
+}
+
+.perf-change {
+    font-size: var(--font-size-sm);
+    opacity: 0.75;
+    margin-left: var(--space-2);
+}
+
+/* Dashboard Content Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    margin-bottom: var(--space-6);
+}
+
+.dashboard-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.dashboard-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.dashboard-card-header h3 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+}
+
+.dashboard-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-10) var(--space-6);
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+
+.dashboard-empty p {
+    font-size: var(--font-size-sm);
+}
+
+.dashboard-list {
+    padding: var(--space-2) 0;
+}
+
+.dashboard-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-5);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.dashboard-list-item:hover {
+    background: var(--color-surface-hover);
+}
+
+.dli-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.dli-number {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+}
+
+.dli-date {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+}
+
+.dli-rank {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-tertiary);
+    width: 24px;
+}
+
+.dli-name {
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+}
+
+.dli-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.dli-amount {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+}
+
+/* Quick Stats */
+.dashboard-quick-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+.quick-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+}
+
+.qs-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.qs-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.qs-value {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.2;
+}
+
+.qs-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+}
