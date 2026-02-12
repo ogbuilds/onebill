@@ -232,8 +232,11 @@ function ClientModal({ businessId, onClose, onDone }) {
                                     onChange={e => update('gstin', e.target.value.toUpperCase())}
                                     maxLength={15}
                                     placeholder="22AAAAA0000A1Z5"
-                                    <GstPortalLink gstin={form.gstin} />
+                                    onBlur={handleGSTINBlur}
+                                />
+                                {fetchingGst && <Loader2 size={16} className="spinner input-icon" />}
                             </div>
+                            <GstPortalLink gstin={form.gstin} />
                         </div>
                     )}
                     <div className="form-group">
