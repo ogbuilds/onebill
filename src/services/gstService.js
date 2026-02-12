@@ -21,8 +21,6 @@ export async function fetchGSTDetails(gstin) {
         throw new Error('Invalid GSTIN format');
     }
 
-    // MOCK REMOVED: Real-time fetch only.
-
     try {
         // Points to our Vercel Serverless Function which holds the API Key securely
         const response = await fetch(`/api/verify-gst?gstNo=${gstin}`);
@@ -39,25 +37,22 @@ export async function fetchGSTDetails(gstin) {
         }
 
         // Map the response to our internal format
-        // *Adjust mapping based on actual API response structure*
-        // Assuming typical structure: { taxPayer: { legalName, tradeName, addr: { bno, st, loc, ... } } }
+        // Supports various structures from different API versions/providers
+        const taxpayer = data.taxpayerInfo || data.taxpayer || (data.data && data.data.taxpayer) || data;
 
-        const taxpayer = data.taxpayerInfo || data; // Fallback
+        // Try to find the address object in various common locations
+        const addrObj = taxpayer.pradr?.addr || taxpayer.address_details || taxpayer.address || {};
 
         // Helper to construct address
-        const buildAddress = (addrObj) => {
-            if (!addrObj) return '';
+        const buildAddress = (obj) => {
+            if (!obj) return '';
             const parts = [
-                addrObj.bno, addrObj.bnm, // Building no/name
-                addrObj.st, addrObj.loc, // Street, Locality
-                addrObj.city, addrObj.dst, // City, District
+                obj.bno, obj.bnm, // Building no/name
+                obj.st, obj.loc, // Street, Locality
+                obj.city, obj.dst, // City, District
             ];
-            // We'll append state and pincode separately if needed, but buildAddress is for the string
-            const addrString = parts.filter(p => p).join(', ');
-            return addrString;
+            return parts.filter(p => p).join(', ');
         };
-
-        const addrObj = taxpayer.pradr?.addr || {};
 
         // Normalize State: API might return "PUNJAB" or "03"
         let stateName = '';
@@ -87,7 +82,6 @@ export async function fetchGSTDetails(gstin) {
             state: stateName || stateFromGstin?.name || '',
             pincode: addrObj.pncd || ''
         };
-
 
     } catch (error) {
         console.error('GST Fetch Error:', error);
