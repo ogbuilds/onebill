@@ -50,17 +50,41 @@ export async function fetchGSTDetails(gstin) {
                 addrObj.bno, addrObj.bnm, // Building no/name
                 addrObj.st, addrObj.loc, // Street, Locality
                 addrObj.city, addrObj.dst, // City, District
-                addrObj.stcd, addrObj.pncd // State Code, Pincode
             ];
-            return parts.filter(p => p).join(', ');
+            // We'll append state and pincode separately if needed, but buildAddress is for the string
+            const addrString = parts.filter(p => p).join(', ');
+            return addrString;
         };
+
+        const addrObj = taxpayer.pradr?.addr || {};
+
+        // Normalize State: API might return "PUNJAB" or "03"
+        let stateName = '';
+        const rawState = addrObj.stcd || '';
+
+        // Try mapping by name first (case insensitive)
+        const stateFromName = INDIAN_STATES.find(s => s.name.toLowerCase() === rawState.toLowerCase());
+        if (stateFromName) {
+            stateName = stateFromName.name;
+        } else {
+            // Try mapping by code
+            const stateFromCode = INDIAN_STATES.find(s => s.code === rawState);
+            if (stateFromCode) stateName = stateFromCode.name;
+        }
+
+        // SANITY CHECK: The GSTIN first 2 digits are the absolute truth
+        const stateFromGstin = getStateFromGSTIN(gstin);
+        if (stateFromGstin && stateName !== stateFromGstin.name) {
+            console.warn(`GST API returned state ${stateName} but GSTIN indicates ${stateFromGstin.name}. Prioritizing GSTIN.`);
+            stateName = stateFromGstin.name;
+        }
 
         return {
             legalName: taxpayer.lgnm || taxpayer.tradeName || '',
             tradeName: taxpayer.tradeNam || '',
-            address: buildAddress(taxpayer.pradr?.addr), // pradr = Principal Address
-            state: taxpayer.pradr?.addr?.stcd || '', // State Name or Code? Need to handle mapping.
-            pincode: taxpayer.pradr?.addr?.pncd || ''
+            address: buildAddress(addrObj),
+            state: stateName || stateFromGstin?.name || '',
+            pincode: addrObj.pncd || ''
         };
 
 
