@@ -5,7 +5,8 @@ import { useToast } from '@contexts/ToastContext';
 import { getClientsByBusiness, createClient, deleteClient, getIntegrationSettings } from '@db/operations';
 import { validateGSTIN, INDIAN_STATES, formatCurrency } from '@logic/gstEngine';
 import { fetchGSTDetails } from '@services/gstService';
-import { Plus, Search, Users, X, FileText, ChevronRight, Trash2, Loader2 } from 'lucide-react';
+import GstPortalLink from '@components/GstPortalLink';
+import { Plus, Search, Users, X, FileText, ChevronRight, Trash2, Loader2, ExternalLink } from 'lucide-react';
 
 export default function Clients() {
     const { currentBusiness } = useBusiness();
@@ -231,9 +232,7 @@ function ClientModal({ businessId, onClose, onDone }) {
                                     onChange={e => update('gstin', e.target.value.toUpperCase())}
                                     maxLength={15}
                                     placeholder="22AAAAA0000A1Z5"
-                                    onBlur={handleGSTINBlur}
-                                />
-                                {fetchingGst && <Loader2 size={16} className="spinner input-icon" />}
+                                    <GstPortalLink gstin={form.gstin} />
                             </div>
                         </div>
                     )}

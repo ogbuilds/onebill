@@ -564,10 +564,23 @@ function IntegrationsSettings() {
                     Real-time GSTIN verification is enabled. You can auto-populate business details by entering a GSTIN.
                 </p>
 
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: '20px' }}>
                     <label className="form-label">API Status</label>
-                    <div className="badge badge-success" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                        <Check size={12} /> Managed by Platform
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                        <div className="badge badge-success" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', alignSelf: 'flex-start' }}>
+                            <Check size={12} /> Managed by Platform
+                        </div>
+                        <div style={{
+                            fontSize: '12px',
+                            padding: '12px',
+                            backgroundColor: 'rgba(108, 92, 231, 0.05)',
+                            borderRadius: '8px',
+                            border: '1px solid rgba(108, 92, 231, 0.1)',
+                            color: '#444'
+                        }}>
+                            <strong>💡 Note:</strong> Your current Appyflow key is in <strong>Trial Mode</strong>.
+                            If you see test addresses (like Ludhiana), use the <strong>"Verify on GST Portal (Free)"</strong> link in forms to check real data for free.
+                        </div>
                     </div>
                 </div>
 
@@ -582,7 +595,10 @@ function IntegrationsSettings() {
                     </label>
                 </div>
 
-                <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+                <div style={{ marginTop: '20px', display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                    <button className="btn btn-secondary" onClick={() => window.open('https://appyflow.in', '_blank')}>
+                        <ExternalLink size={14} /> Buy Credits
+                    </button>
                     <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
                         {saving ? <span className="spinner" /> : 'Save Integration'}
                     </button>

@@ -4,6 +4,7 @@ import { useToast } from '@contexts/ToastContext';
 import { INDIAN_STATES, validateGSTIN } from '@logic/gstEngine';
 import { fetchGSTDetails, fetchBankDetails, fetchPincodeDetails } from '@services/gstService';
 import { getIntegrationSettings } from '@db/operations';
+import GstPortalLink from '@components/GstPortalLink';
 import {
     Building2, ArrowRight, Sparkles, Receipt, TrendingUp, Shield,
     User, MapPin, CreditCard, Palette, ArrowLeft, Check, Upload, X, Loader2
@@ -354,6 +355,7 @@ export default function Onboarding() {
                                             />
                                             {fetchingGst && <Loader2 size={16} className="spinner input-icon" />}
                                         </div>
+                                        <GstPortalLink gstin={form.gstin} />
                                     </div>
                                 </div>
                                 <div className="form-row">
