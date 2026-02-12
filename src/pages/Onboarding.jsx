@@ -115,6 +115,10 @@ export default function Onboarding() {
 
             if (details) {
                 toast.success('Business details fetched!');
+
+                // If the service logic detected a state mismatch (unlikely but possible), it logged a warning.
+                // We'll trust the details object which now has the normalized/sanity-checked state.
+
                 setForm(prev => ({
                     ...prev,
                     businessName: details.legalName || prev.businessName,
